@@ -1,8 +1,8 @@
 {
-    "settings": "LLM Settings",
-    "basics": "Basics of Prompting",
-    "elements": "Prompt Elements",
-    "tips": "General Tips for Designing Prompts",
-    "examples": "Examples of Prompts"
+    "settings": "LLM設定",
+    "basics": "基本的なプロンプティング",
+    "elements": "プロンプトの要素",
+    "tips": "プロンプトをデザインする一般的なTips",
+    "examples": "プロンプトの例"
 }
   
