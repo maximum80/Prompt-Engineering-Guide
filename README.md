@@ -6,8 +6,6 @@ LLMの開発に対する高い関心に動機づけられて、最新の論文�
 
 プロンプティングを楽しみましょう！
 
-Prompt engineering is a relatively new discipline for developing and optimizing prompt
-
 ---
 ## お知らせ・更新
 

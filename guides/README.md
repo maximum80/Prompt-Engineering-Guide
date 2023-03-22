@@ -1,11 +1,11 @@
-## Guides 🔮
-The following are a set of guides on prompt engineering developed by us (DAIR.AI). Guides are work in progress.  
+## ガイド 🔮
+以下は、私たち（DAIR.AI）が開発したプロンプトエンジニアリングに関するガイドの一例です。ガイドは現在進行形です。 
 
-- [Prompt Engineering - Introduction](/guides/prompts-intro.md)
-- [Prompt Engineering - Basic Prompting](/guides/prompts-basic-usage.md)
-- [Prompt Engineering - Advanced Prompting](/guides/prompts-advanced-usage.md)
-- [Prompt Engineering - Applications](/guides/prompts-applications.md)
-- [Prompt Engineering - ChatGPT](/guides/prompts-chatgpt.md)
-- [Prompt Engineering - Adversarial Prompting](/guides/prompts-adversarial.md)
-- [Prompt Engineering - Reliability](/guides/prompts-reliability.md)
-- [Prompt Engineering - Miscellaneous Topics](/guides/prompts-miscellaneous.md)
+- [プロンプトエンジニアリング - はじめに](/guides/prompts-intro.md)
+- [プロンプトエンジニアリング - 基本的なプロンプティング](/guides/prompts-basic-usage.md)
+- [プロンプトエンジニアリング - 高度なプロンプティング](/guides/prompts-advanced-usage.md)
+- [プロンプトエンジニアリング - アプリケーション](/guides/prompts-applications.md)
+- [プロンプトエンジニアリング - ChatGPT](/guides/prompts-chatgpt.md)
+- [プロンプトエンジニアリング - 敵対的Prompting](/guides/prompts-adversarial.md)
+- [プロンプトエンジニアリング - 信頼性](/guides/prompts-reliability.md)
+- [プロンプトエンジニアリング - 雑学](/guides/prompts-miscellaneous.md)

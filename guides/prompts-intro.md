@@ -1,73 +1,76 @@
 # Prompting Introduction
 
-Prompt engineering is a relatively new discipline for developing and optimizing prompts to efficiently use language models (LMs) for a wide variety of applications and research topics. Prompt engineering skills help to better understand the capabilities and limitations of large language models (LLMs). Researchers use prompt engineering to improve the capacity of LLMs on a wide range of common and complex tasks such as question answering and arithmetic reasoning. Developers use prompt engineering to design robust and effective prompting techniques that interface with LLMs and other tools.
+プロンプトエンジニアリングは、幅広いアプリケーションや研究トピックで言語モデル（LM）を効率的に利用するためのプロンプトを開発・最適化する比較的新しい分野です。プロンプトエンジニアリングのスキルは、大規模言語モデル（LLM）の能力と制約をよりよく理解するのに役立ちます。研究者は、プロンプトエンジニアリングを用いて、質問応答や算術推論などの一般的で複雑なタスクに対するLLMの性能を向上させます。開発者は、プロンプトエンジニアリングを用いて、LLMや他のツールと連携する堅牢で効果的なプロンプティング技術を設計します。
 
-This guide covers the basics of standard prompts to provide a rough idea of how to use prompts to interact and instruct large language models (LLMs). 
+このガイドでは、標準的なプロンプトの基本を説明し、プロンプトを使用して大規模言語モデル（LLM）と対話し、指示する方法について説明します。
 
-All examples are tested with `text-davinci-003` (using OpenAI's playground) unless otherwise specified. It uses the default configurations, e.g., `temperature=0.7` and `top-p=1`.
+すべての例は、特に指定がない限り、`text-davinci-003`（OpenAIのプレイグラウンドを使用）でテストされています。デフォルトの設定としては、 `temperature=0.7` と `top-p=1` を使用しています。
 
-Topic:
-- [Basic Prompts](#basic-prompts)
-- [A Word on LLM Settings](#a-word-on-llm-settings)
-- [Standard Prompts](#standard-prompts)
-- [Prompt Elements](#elements-of-a-prompt)
-- [General Tips for Designing Prompts](#general-tips-for-designing-prompts)
-
----
-
-## Basic Prompts
-
-You can already achieve a lot with prompts, but the quality of results depends on how much information you provide it. A prompt can contain information like the `instruction` or `question` you are passing to the model and include other details such as `inputs` or `examples`. 
-
-Here is a basic example of a simple prompt:
-
-*Prompt*
-```
-The sky is
-```
-
-*Output:*
-```
-blue
-
-The sky is blue on a clear day. On a cloudy day, the sky may be gray or white.
-```
-
-As you can see, the language model outputs a continuation of strings that make sense given the context `"The sky is"`. The output might be unexpected or far from the task we want to accomplish. 
-
-This basic example also highlights the necessity to provide more context or instructions on what specifically we want to achieve.
-
-Let's try to improve it a bit:
-
-*Prompt:*
-```
-Complete the sentence: 
-
-The sky is
-```
-
-*Output:*
-
-```
- so  beautiful today.
-```
-
-Is that better? Well, we told the model to complete the sentence so the result looks a lot better as it follows exactly what we told it to do ("complete the sentence"). This approach of designing optimal prompts to instruct the model to perform a task is what's referred to as **prompt engineering**. 
-
-The example above is a basic illustration of what's possible with LLMs today. Today's LLMs can perform all kinds of advanced tasks that range from text summarization to mathematical reasoning to code generation.
+トピック:
+- [基本プロンプト](#basic-prompts)
+- [LLMの設定に関する単語](#a-word-on-llm-settings)
+- [標準プロンプト](#standard-prompts)
+- [プロンプトの要素](#elements-of-a-prompt)
+- [プロンプトをデザインするための一般的なヒント](#general-tips-for-designing-prompts)
 
 ---
-## A Word on LLM Settings
 
-When working with prompts, you will be interacting with the LLM via an API or directly. You can configure a few parameters to get different results for your prompts. 
+## 基本プロンプト
 
-**Temperature** - In short, the lower the temperature the more deterministic the results in the sense that the highest probable next token is always picked. Increasing the temperature could lead to more randomness encouraging more diverse or creative outputs. We are essentially increasing the weights of the other possible tokens. In terms of application, we might want to use a lower temperature for something like fact-based QA to encourage more factual and concise responses. For poem generation or other creative tasks, it might be beneficial to increase the temperature. 
+プロンプトを使えばすでに多くのことが実現できますが、結果の質はプロンプトにどれだけの情報を与えるかによって決まります。プロンプトには、モデルに渡す `指示` や `質問` のような情報を含めることができ、`入力` や `例` のような他の詳細も含めることができます。
 
-**Top_p** - Similarly, with top_p, a sampling technique with temperature called nucleus sampling, you can control how deterministic the model is at generating a response. If you are looking for exact and factual answers keep this low. If you are looking for more diverse responses, increase to a higher value. 
+ここでは、簡単なプロンプトの基本例を紹介します:
 
-The general recommendation is to alter one, not both.
+*プロンプト*
+```
+空が
+```
 
-Before starting with some basic examples, keep in mind that your results may vary depending on the version of LLM you are using. 
+*アウトプット:*
+```
+青いのはなぜですか？
+
+空が青く見える理由は、太陽からの光が大気中の微粒子や気体分子と相互作用することによります。太陽光は、さまざまな波長の光を含む白色光です。大気中では、光が散乱する現象が起こります。これは、光が大気中の粒子や気体分子にぶつかり、さまざまな方向に散らばることを意味します。
+```
+
+ご覧のように、言語モデルは、文脈`"空が"`を考慮した意味のある文字列を続けて出力します。
+この出力は予想外のものであったり、達成したいタスクからかけ離れたものであったりするかもしれません。
+
+この基本的な例では、具体的に何を実現したいのか、もっと文脈や指示を与える必要性があることがわかります。
+
+少し改良してみましょう:
+
+*プロンプト:*
+```
+次の単語に続く文を10文字以内で完成させてください：
+
+空が
+```
+
+*アウトプット:*
+
+```
+青くて綺麗。
+```
+
+いかがでしょうか？
+これは、モデルに文章を完成させるように指示した結果であり、私たちが指示したこと（「文章を完成させる」）に忠実に従うので、より良く見えます。このように、モデルにタスクを実行させるために最適なプロンプトを設計するアプローチは、**プロンプトエンジニアリング**と呼ばれます。
+
+上の例は、現在のLLMで可能なことを示す基本的なものです。今日のLLMは、テキストの要約から数学的推論、コード生成に至るまで、あらゆる種類の高度なタスクを実行することができます。
+
+---
+## LLMの設定に関するパラメーター
+
+プロンプトを扱う場合、APIを介して、または直接LLMと対話することになります。いくつかのパラメータを設定することで、プロンプトに異なる結果を得ることができます。
+
+**Temperature** - 簡潔に言うと、この値が低ければ低いほど、最も確率が最も高いものが常に選ばれるため、結果はより決定論的になります。この値を上げると、ランダム性が増し、より多様で創造的なアウトプットが可能になります。つまり、他の回答の可能性のある重みを増やすことになります。応用例としては、事実に基づくQAなどでは、この値を低くして、より事実に基づいた簡潔な回答を促すとよいでしょう。逆に、詩の生成やその他の創造的なタスクでは、temperatureを上げると効果的かもしれません。
+
+
+**Top_p** - 同様に、核サンプリングと呼ばれるサンプリング手法であるtop_pでは、モデルが応答を生成する際の決定性をコントロールすることができます。正確で事実に基づいた回答を求めるのであれば、この値を低くしておきます。より多様な回答を求めるのであれば、より高い値にします。
+
+一般的には、両方ではなく、どちらかを変更することをお勧めします。
+
+基本的な例から始める前に、あなたの使っているLLMのバージョンによって結果が異なる可能性があることを予めご承知おきください。
 
 ---
 ## Standard Prompts
