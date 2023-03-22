@@ -1,55 +1,57 @@
-# Prompt Engineering Guide
+# プロンプトエンジニアリング ガイド
 
-Prompt engineering is a relatively new discipline for developing and optimizing prompts to efficiently use language models (LMs) for a wide variety of applications and research topics. Prompt engineering skills help to better understand the capabilities and limitations of large language models (LLMs). Researchers use prompt engineering to improve the capacity of LLMs on a wide range of common and complex tasks such as question answering and arithmetic reasoning. Developers use prompt engineering to design robust and effective prompting techniques that interface with LLMs and other tools.
+プロンプトエンジニアリングは、幅広いアプリケーションや研究トピックで言語モデル（LM）を効率的に利用するためのプロンプトを開発・最適化する比較的新しい分野です。プロンプトエンジニアリングのスキルは、大規模言語モデル（LLM）の能力と制約をよりよく理解するのに役立ちます。研究者は、プロンプトエンジニアリングを用いて、質問応答や算術推論などの一般的で複雑なタスクに対するLLMの性能を向上させます。開発者は、プロンプトエンジニアリングを用いて、LLMや他のツールと連携する堅牢で効果的なプロンプティング技術を設計します。
 
-Motivated by the high interest in developing with LLMs, we have created this new prompt engineering guide that contains all the latest papers, learning guides, lectures, references, and tools related to prompt engineering. 
+LLMの開発に対する高い関心に動機づけられて、最新の論文、学習ガイド、講義、参考文献、プロンプトエンジニアリングに関連するツールを含む新しいプロンプトエンジニアリングガイドを作成しました。
 
-Happy Prompting!
+プロンプティングを楽しみましょう！
 
----
-## Announcements / Updates
-
-- 🎉 We have launched new web version of the guide [here](https://www.promptingguide.ai/)
-- 🎓 Partnered with Sphere to deliver a new course on [Prompt Engineering for LLMs](https://www.getsphere.com/cohorts/prompt-engineering-for-llms?source=github)
-- 💬 New ChatGPT prompt engineering guide coming soon!
-- 🔥 We reached #1 on Hacker News on 21 Feb 2023
-- 🎉 The Prompt Engineering Lecture went live [here](https://youtu.be/dOxUroR57xs)
-- 🎓 We're creating a set of comprehensive guides [here](#guides)
-
-[Join our Discord](https://discord.gg/SKgkVT8BGJ)
-
-[Follow us on Twitter](https://twitter.com/dair_ai)
-
-[Subscribe to our Newsletter](https://nlpnews.substack.com/)
+Prompt engineering is a relatively new discipline for developing and optimizing prompt
 
 ---
-## Lecture
+## お知らせ・更新
 
-We have published a 1 hour lecture that provides a comprehensive overview of prompting techniques, applications, and tools.
-- [Video Lecture](https://youtu.be/dOxUroR57xs)
-- [Notebook with code](https://github.com/dair-ai/Prompt-Engineering-Guide/blob/main/notebooks/pe-lecture.ipynb)
-- [Slides](https://github.com/dair-ai/Prompt-Engineering-Guide/blob/main/lecture/Prompt-Engineering-Lecture-Elvis.pdf)
+- 🎉  ガイドの新しいウェブバージョンが[こちら](https://www.promptingguide.ai/)で公開されました
+- 🎓 Sphereと提携して、[LLMs向けプロンプトエンジニアリング](https://www.getsphere.com/cohorts/prompt-engineering-for-llms?source=github)の新コースを提供します
+- 💬 新しいChatGPTプロンプトエンジニアリングガイドが近日公開予定です！
+- 🔥 2023年2月21日にHacker Newsで1位を獲得しました
+- 🎉 プロンプトエンジニアリング講義が[こちら](https://youtu.be/dOxUroR57xs)で公開されました
+- 🎓 総合的なガイドを[こちら](#guides)で作成しています
+
+[Discordに参加する](https://discord.gg/SKgkVT8BGJ)
+
+[Twitterでフォローする](https://twitter.com/dair_ai)
+
+[ニュースレターに登録する](https://nlpnews.substack.com/)
+
+---
+## 講義
+
+プロンプティング技術、アプリケーション、ツールの包括的な概要を提供する1時間の講義を公開しました。
+- [ビデオ講義](https://youtu.be/dOxUroR57xs)
+- [コード付きノートブック](https://github.com/dair-ai/Prompt-Engineering-Guide/blob/main/notebooks/pe-lecture.ipynb)
+- [スライド](https://github.com/dair-ai/Prompt-Engineering-Guide/blob/main/lecture/Prompt-Engineering-Lecture-Elvis.pdf)
 
 ---
 
-## Guides
-The following are a set of guides on prompt engineering developed by us. Guides are work in progress.  
+## ガイド
+以下は、私たちが開発したプロンプトエンジニアリングに関する一連のガイドです。ガイドは作業中です。
 
-- [Prompt Engineering - Introduction](/guides/prompts-intro.md)
-- [Prompt Engineering - Basic Prompting](/guides/prompts-basic-usage.md)
-- [Prompt Engineering - Advanced Prompting](/guides/prompts-advanced-usage.md)
-- [Prompt Engineering - Applications](/guides/prompts-applications.md)
-- [Prompt Engineering - ChatGPT](/guides/prompts-chatgpt.md)
-- [Prompt Engineering - Adversarial Prompting](/guides/prompts-adversarial.md)
-- [Prompt Engineering - Reliability](/guides/prompts-reliability.md)
-- [Prompt Engineering - Miscellaneous Topics](/guides/prompts-miscellaneous.md)
-- [Prompt Engineering - Papers](/pages/papers.mdx)
-- [Prompt Engineering - Tools](/pages/tools.mdx)
-- [Prompt Engineering - Datasets](/pages/datasets.mdx) 
-- [Prompt Engineering - Additional Readings](/pages/readings.mdx)
+- [プロンプトエンジニアリング - はじめに](/guides/prompts-intro.md)
+- [プロンプトエンジニアリング - 基本的なプロンプティング](/guides/prompts-basic-usage.md)
+- [プロンプトエンジニアリング - 高度なプロンプティング](/guides/prompts-advanced-usage.md)
+- [プロンプトエンジニアリング - アプリケーション](/guides/prompts-applications.md)
+- [プロンプトエンジニアリング - ChatGPT](/guides/prompts-chatgpt.md)
+- [プロンプトエンジニアリング - 敵対的Prompting](/guides/prompts-adversarial.md)
+- [プロンプトエンジニアリング - 信頼性](/guides/prompts-reliability.md)
+- [プロンプトエンジニアリング - 雑多なトピック](/guides/prompts-miscellaneous.md)
+- [プロンプトエンジニアリング - 論文](/pages/papers.mdx)
+- [プロンプトエンジニアリング - ツール](/pages/tools.mdx)
+- [プロンプトエンジニアリング - データセット](/pages/datasets.mdx) 
+- [プロンプトエンジニアリング - 追加の読み物](/pages/readings.mdx)
 
 ---
-If you are using the guide for your work, please cite us as follows:
+もしこのガイドをお仕事で利用される場合は、以下のように引用してください。:
 
 ```
 @article{Saravia_Prompt_Engineering_Guide_2022,
@@ -61,4 +63,4 @@ year = {2022}
 }
 ```
 
-Feel free to open a PR if you think something is missing here. Always welcome feedback and suggestions. Just open an issue!
+もし何かが欠けていると思われる場合は、お気軽にPRを作成してください。フィードバックや提案はいつでも歓迎です。問題を報告してください！
