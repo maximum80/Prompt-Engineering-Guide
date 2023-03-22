@@ -1,114 +1,114 @@
-# Basics of Prompting
+# プロンプトの基礎
 
-## Basic Prompts
+## 基本的なプロンプト
 
-You can achieve a lot with simple prompts, but the quality of results depends on how much information you provide it and how well-crafted it is. A prompt can contain information like the *instruction* or *question* you are passing to the model and including other details such as *context*, *inputs*, or *examples*. You can use these elements to instruct the model better and as a result get better results.
+シンプルなプロンプトでも多くを達成できますが、結果の品質は提供する情報の量とそのクオリティによって異なります。プロンプトには、モデルに渡す*指示*や*質問*のような情報、*文脈*、*入力*、または*例*などの他の詳細を含めることができます。これらの要素を使用して、モデルをより適切に指示し、より良い結果を得ることができます。
 
-Let's get started by going over a basic example of a simple prompt:
+まずは、シンプルなプロンプトの基本例について説明しましょう。
 
-*Prompt*
+*プロンプト*
 ```
-The sky is
-```
-
-*Output:*
-```
-blue
-
-The sky is blue on a clear day. On a cloudy day, the sky may be gray or white.
+空が
 ```
 
-As you can see, the language model outputs a continuation of strings that make sense give the context `"The sky is"`. The output might be unexpected or far from the task we want to accomplish. 
-
-This basic example also highlights the necessity to provide more context or instructions on what specifically we want to achieve.
-
-Let's try to improve it a bit:
-
-*Prompt:*
+*出力:*
 ```
-Complete the sentence: 
+青い
 
-The sky is
+晴れた日には空は青く、曇った日には空は灰色や白色になることがあります。
 ```
 
-*Output:*
+おわかりのように、言語モデルは、文脈「"空が"」に合った文字列の続きを出力します。出力は予期しないものであり、私たちが達成したいタスクからはかけ離れている可能性があります。
 
+この基本例は、より多くの文脈や指示を提供する必要性を強調するものでもあります。
+
+少し改善してみましょう。
+
+*プロンプト:*
 ```
-so  beautiful today.
-```
+以下の続きとなる文を完成させてください：
 
-Is that better? Well, we told the model to complete the sentence so the result looks a lot better as it follows exactly what we told it to do ("complete the sentence"). This approach of designing optimal prompts to instruct the model to perform a task is what's referred to as **prompt engineering**. 
-
-The example above is a basic illustration of what's possible with LLMs today. Today's LLMs are able to perform all kinds of advanced tasks that range from text summarization to mathematical reasoning to code generation.
-
-## Prompt Formatting
-
-We have tried a very simple prompt above. A standard prompt has the following format:
-
-```
-<Question>?
+空が
 ```
 
-or 
+*出力:*
 
 ```
-<Instruction>
+青くとてもきれいです。
+```
+
+これでより良くなりましたか？ これで文を完成するようにモデルに指示したため、結果ははるかに良くなりました（「文を完成する」という指示に忠実に従っているため）。このように、タスクを実行するために最適なプロンプトを設計するアプローチを**プロンプトエンジニアリング**と呼びます。
+
+上記の例は、LLM（Language Model）で実現できることの基本的な例です。今日のLLMは、テキスト要約から数学的推論、コード生成まで、あらゆる種類の高度なタスクを実行できます。
+
+## プロンプトのフォーマット
+
+上記で非常にシンプルなプロンプトを試しました。標準的なプロンプトのフォーマットは次のとおりです。
+
+```
+<質問>?
+```
+
+または
+
+```
+<指示>
 ```
  
-This can be formatted into a question answering (QA) format, which is standard in a lot of QA datasets, as follows:
+これは、質問応答（QA）フォーマットにフォーマットすることができます。これは、多くのQAデータセットで標準的です。
 
 ```
-Q: <Question>?
+Q: <質問>?
 A: 
 ```
 
-When prompting like the above, it's also referred to as *zero-shot prompting*, i.e., you are directly prompting the model for a response without any examples or demonstrations about the task you want it to achieve. Some large language models do have the ability to perform zero-shot prompting but it depends on the complexity and knowledge of the task at hand. 
+上記のようにプロンプトを行う場合、*zero-shot prompting*とも呼ばれます。つまり、どんな例やデモンストレーションもなく、直接モデルに応答を求めています。いくつかの大規模言語モデルには、zero-shot promptingを実行できる機能がありますが、それは対象のタスクの複雑さと知識に依存します。
 
-Given the standard format above, one popular and effective technique to prompting is referred to as *few-shot prompting* where we provide exemplars (i.e., demonstrations). Few-shot prompts can be formatted as follows:
-
-```
-<Question>?
-<Answer>
-
-<Question>?
-<Answer>
-
-<Question>?
-<Answer>
-
-<Question>?
+上記の標準フォーマットを考えると、*few-shot prompting*と呼ばれる人気の高い効果的なプロンプティング技術があります。フューショットプロンプティングでは、サンプル（デモンストレーション）を提供します。フューショットプロンプティングは、以下のようにフォーマットすることができます。
 
 ```
+<質問>?
+<答え>
 
-The QA format version would look like this:
+<質問>?
+<答え>
+
+<質問>?
+<答え>
+
+<質問>?
 
 ```
-Q: <Question>?
-A: <Answer>
 
-Q: <Question>?
-A: <Answer>
+QAフォーマットバージョンは以下のようになります。
 
-Q: <Question>?
-A: <Answer>
+```
+Q: <質問>?
+A: <答え>
 
-Q: <Question>?
+Q: <質問>?
+A: <答え>
+
+Q: <質問>?
+A: <答え>
+
+Q: <質問>?
 A:
 ```
 
-Keep in mind that it's not required to use QA format. The prompt format depends on the task at hand. For instance, you can perform a simple classification task and give exemplars that demonstrate the task as follows:
+QAフォーマットを使用する必要はないことに注意してください。プロンプトフォーマットは、対象のタスクによって異なります。たとえば、簡単な分類タスクを実行し、以下のようにタスクを示すサンプルを提供することができます。
 
-*Prompt:*
+*プロンプト:*
 ```
-This is awesome! // Positive
-This is bad! // Negative
-Wow that movie was rad! // Positive
-What a horrible show! //
-```
-
-*Output:*
-```
-Negative
+これは素晴らしい! // ポジティブ
+これは酷い! // ネガティブ
+あの映画は最高だった! // ポジティブ
+なんてひどい番組なんだ! //
 ```
 
-Few-shot prompts enable in-context learning which is the ability of language models to learn tasks given a few demonstrations.
+*出力:*
+```
+ネガティブ
+```
+
+few-shot promptingにより、文脈に沿った学習が可能になります。言語モデルがタスクを学習するために、わずかなサンプルを提供することができます。
