@@ -1,80 +1,79 @@
-# ChatGPT Prompt Engineering
+# ChatGPT プロンプトエンジニアリング
 
 import { Callout, FileTree } from 'nextra-theme-docs'
 import {Screenshot} from 'components/screenshot'
 import CHATGPT1 from '../../img/chatgpt-1.png'
 import CHATGPTCLASSIC from '../../img/chatgpt-classic.png'
 
-In this section, we cover the latest prompt engineering techniques for ChatGPT, including tips, applications, limitations, papers, and additional reading materials.
+このセクションでは、ChatGPTの最新のプロンプトエンジニアリング技術について、ヒント、アプリケーション、制限、論文、参考資料を追加しています。
 
 <Callout emoji="⚠️">
-  This section is under heavy development.
+  このセクションは、現在大幅に開発中です。
 </Callout>
 
-Topics:
-- [ChatGPT Introduction](#chatgpt-introduction)
-- [Reviewing The Conversation Task](#reviewing-the-conversation-task)
-- [Conversations with ChatGPT](#conversations-with-chatgpt)
+トピック：
+- [ChatGPTの紹介](#ChatGPTの紹介)
+- [会話タスクのレビュー](#会話タスクのレビュー)
+- [ChatGPTとの会話](#ChatGPTとの会話)
 
 ---
-## ChatGPT Introduction
+## ChatGPTの紹介
 
-ChatGPT is a new model [trained by OpenAI](https://openai.com/blog/chatgpt) that has the capability to interact in a conversational way. This model is trained to follow instructions in a prompt to provide appropriate responses in the context of a dialogue. ChatGPT can help with answering questions, suggesting recipes, writing lyrics in a certain style, generating code, and much more.
+ChatGPTは、会話形式でのやりとりができる新しいモデルであり、OpenAIによってトレーニングされています。このモデルは、プロンプトに従って指示を実行し、対話の文脈に適切な応答を提供するようにトレーニングされています。ChatGPTは、質問に答えたり、レシピの提案、特定のスタイルで歌詞を書いたり、コードを生成したりするのに役立ちます。
 
-ChatGPT is trained using Reinforcement Learning from Human Feedback (RLHF). While this model is a lot more capable than previous GPT iterations (and also trained to reduce harmful and untruthful outputs), it still comes with limitations. Let's cover some of the capabilities and limitations with concrete examples. 
+ChatGPTは、人間のフィードバックからの強化学習（RLHF）を使用してトレーニングされています。このモデルは、以前のGPTのイテレーションよりもはるかに能力がある（そして有害で不正確な出力を減らすためにトレーニングされている）が、それでも制限があります。いくつかの具体的な例を使って、これらの能力と制限について説明しましょう。
 
-You can use the research preview of ChatGPT [here](chat.openai.com) but for the examples below we will use the `Chat` mode on the OpenAI Playground.
-
----
-## Reviewing The Conversation Task
-
-In one of the previous guides, we covered a bit about conversation capabilities and role prompting. We covered how to instruct the LLM to have a conversation in a specific style, with a specific intent, behavior, and identity.
-
-Let's review our previous basic example where we created a conversational system that's able to generate more technical and scientific responses to questions. 
-
-*Prompt:*
-```
-The following is a conversation with an AI research assistant. The assistant tone is technical and scientific.
-
-Human: Hello, who are you?
-AI: Greeting! I am an AI research assistant. How can I help you today?
-Human: Can you tell me about the creation of black holes?
-AI:
-```
-
-From the example above, you can see two important components:
-- the **intent** or explanation of what the chatbot is
-- the **identity** which instructs the style or tone the chatbot will use to respond
-
-The simple example above works well with the text completion APIs that uses `text-davinci-003`. More recently, OpenAI [announced the ChatGPT APIs](https://openai.com/blog/introducing-chatgpt-and-whisper-apis), which is a more powerful and cheaper model called `gpt-3.5-turbo` was specifically built for this type of functionality (chat completions). In fact, OpenAI recommends this as their best model even for non-chat use cases. Other benefits of using the ChatGPT APIs are significant cost reduction (90%) and efficiency.
-
-Big companies like Snap Inc. and Instacart are already integrating conversational features powered by ChatGPT on their products that range from personalized recommendations to open-ended shopping goals.
+ChatGPTの研究プレビューは[こちら](chat.openai.com)で利用できますが、以下の例ではOpenAI Playgroundの`Chat`モードを使用します。
 
 ---
-## Conversations with ChatGPT
+## 会話タスクのレビュー
 
-### Multi-turn Conversations
+以前のガイドの1つで、会話の能力や役割のプロンプトについて少し説明しました。特定のスタイル、意図、行動、アイデンティティでLLMに会話を行うように指示する方法について説明しました。
 
-To begin demonstrating the capabilities of ChatGPT, we will use the chatbot assistant example above and discuss the results. Compared to `text-davinci-003`, the `gpt-3.5-turbo` model that powers ChatGPT uses a chat format as input. The model expects a series of messages as input and uses those to generate a response.
+ここでは、より技術的で科学的な応答を生成できる会話システムを作成した基本的な例を再度みてみましょう。
 
-*Input:*
+*プロンプト：*
 ```
-SYSTEM: You are an AI research assistant. You use a tone that is technical and scientific.
-USER: Hello, who are you?
-ASSISTANT: Greeting! I am an AI research assistant. How can I help you today?
-USER: Can you tell me about the creation of black holes?
+以下はAI研究アシスタントとの会話です。アシスタントのトーンは技術的で科学的なものとします。
+
+人間：こんにちは、あなたは誰ですか？
+AI：ご挨拶です！私はAIの研究助手です。今日はどのようなご用件でしょうか？
+人間： ブラックホールの生成について教えてください。
+AI：
+```
+上記の例から、2つの重要なコンポーネントがわかります。
+- チャットボットの**意図**または説明
+- 応答時に使用するスタイルやトーンを指示する**アイデンティティ**
+
+上記の単純な例は、`text-davinci-003`を使用するテキスト補完APIでうまく機能します。最近、OpenAIは[ChatGPT API](https://openai.com/blog/introducing-chatgpt-and-whisper-apis)を発表しました。より強力で安価な`gpt-3.5-turbo`モデルは、このタイプの機能（チャット補完）に特化して開発されたもので、非チャットの使用ケースでもOpenAIの最高峰のモデルとして推奨されています。ChatGPT APIを使用することの利点は、コストの削減（90％）と効率性です。
+
+Snap Inc.やInstacartなどの大手企業は、パーソナライズされた推奨事項から自由なショッピング目標まで、ChatGPTを利用した会話機能を既に自社製品に組み込んでいます。
+
+---
+## ChatGPTとの会話
+
+### マルチターンの会話
+
+ChatGPTの機能を示すために、上記のチャットボットアシスタントの例を使用して、その結果について説明します。`text-davinci-003`に比べて、ChatGPTのパワーを支える`gpt-3.5-turbo`モデルは、入力としてチャット形式を使用します。モデルは、入力として一連のメッセージを期待し、それらを使用して応答を生成します。
+
+*入力：*
+```
+システム：あなたはAIの研究助手です。あなたは技術的で科学的なトーンで話します。
+ユーザ：こんにちは、あなたは誰ですか？
+アシスタント：ご挨拶です！私はAIの研究助手です。今日はどのようなご用件でしょうか？
+ユーザ：ブラックホールの生成について教えてください。
 ```
 
-*Output:*
+*出力：*
 ```
-ASSISTANT: Of course! Black holes are created when a massive star runs out of fuel and collapses under its own gravity. This collapse causes the star to become incredibly dense, with a gravitational field so strong that not even light can escape it. This point of no return is known as the event horizon. Once a star crosses the event horizon, it is considered a black hole...
+アシスタント：もちろんです！ブラックホールとは、巨大な星が燃料を使い果たし、自らの重力で崩壊したときにできるものです。この崩壊によって、星は信じられないほど密度が高くなり、光さえも逃れられないほど強い重力場ができます。この帰らざる地点が事象の地平線と呼ばれるものです。事象の地平線を超えた星は、ブラックホールとみなされます。
 ```
 
-Note that in the example above, I have simplified the input and output but the ChatGPT chat completion API requires messages to be in a specific format. I have added a snapshot below of how this example would look using the `Chat Mode` in the OpenAI Playground:
+上記の例では、入力と出力を単純化しましたが、ChatGPTチャット補完APIは、メッセージを特定の形式で入力する必要があります。以下に、OpenAI Playgroundの`Chat Mode`を使用してこの例がどのように見えるかのスナップショットを追加しました：
 
 <Screenshot src={CHATGPT1} alt="CHATGPT1" />
 
-The more formal API call for our example would look something like the example below:
+この例でより正式なAPIコールは、以下の例のようなものになります：
 
 ```python
 import openai
@@ -82,47 +81,48 @@ import openai
 openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
   messages=[
-        {"role": "system", "content": "You are an AI research assistant. You use a tone that is technical and scientific."},
-        {"role": "user", "content": "Hello, who are you?"},
-        {"role": "assistant", "content": "Greeting! I am an AI research assistant. How can I help you today?"},
-        {"role": "user", "content": "Can you tell me about the creation of black holes?"}
+        {"role": "system", "content": "あなたはAIの研究助手です。あなたは技術的で科学的なトーンで話します。"},
+        {"role": "user", "content": "こんにちは、あなたは誰ですか？"},
+        {"role": "assistant", "content": "ご挨拶です！私はAIの研究助手です。今日はどのようなご用件でしょうか？"},
+        {"role": "user", "content": "ブラックホールの生成について教えてください。"}
     ]
 )
 ```
-In fact, the way developers interact with ChatGPT in the future is expected to be done via the [Chat Markup Language](https://github.com/openai/openai-python/blob/main/chatml.md) (ChatML for short).
 
-### Single-turn tasks
+実際には、ChatGPTとの開発者のやりとりは、[Chat Markup Language](https://github.com/openai/openai-python/blob/main/chatml.md)（短縮形ChatML）を介して行われることが期待されています。
 
-The chat format enables multi-turn conversations but it also supports single-turn tasks similar to what we used with `text-davinci-003`. This means we can use ChatGPT to perform similar tasks as what we have demonstrated for the original GPT models. For example, let's try to perform the following question answering task using ChatGPT:
+### 単一ターンタスク
+
+チャット形式は、マルチターンの会話を可能にするだけでなく、`text-davinci-003`で使用したのと似た単一ターンのタスクもサポートしています。これは、オリジナルのGPTモデルで実証したのと同様のタスクをChatGPTを使用して実行できることを意味します。たとえば、ChatGPTを使用して次の質問応答タスクを実行してみましょう。
 
 *Input:*
 ```
-USER: Answer the question based on the context below. Keep the answer short and concise. Respond "Unsure about answer" if not sure about the answer.
+ユーザ: 以下の文脈に基づき、質問に答えてください。回答は短く、簡潔に答えてください。答えに自信がない場合は、「回答できません。」と答えてください。
 
-Context: Teplizumab traces its roots to a New Jersey drug company called Ortho Pharmaceutical. There, scientists generated an early version of the antibody, dubbed OKT3. Originally sourced from mice, the molecule was able to bind to the surface of T cells and limit their cell-killing potential. In 1986, it was approved to help prevent organ rejection after kidney transplants, making it the first therapeutic antibody allowed for human use.
+文脈: テプリズマブのルーツは、ニュージャージー州のオーソ・ファーマシューティカルという製薬会社です。そこで科学者たちは、OKT3と名付けられたこの抗体の初期バージョンを作製した。この分子はもともとマウスから採取したもので、T細胞の表面に結合し、その殺傷能力を制限することができた。1986年には、腎臓移植後の臓器拒絶反応を防ぐ目的で承認され、ヒトへの使用が許可された最初の治療用抗体となりました。
 
-Question: What was OKT3 originally sourced from?
+質問:  OKT3はもともと何から調達されたのですか？
 
-Answer:
+回答:
 ```
 
-*Output:*
+*アウトプット：*
 ```
-ASSISTANT: Mice.
+アシスタント: マウス。
 ```
 
-Keep in mind that I am adding the `USER` and `ASSISTANT` labels to better demonstrate how the task can be performed using ChatGPT. Here is the example using the Playground:
+このようなタスクをChatGPTを使用して実行する方法をより良く説明するために、私は `USER` と `ASSISTANT` ラベルを追加しています。プレイグラウンドを使用した例は次のとおりです。
 
 <Screenshot src={CHATGPTCLASSIC} alt="CHATGPTCLASSIC" />
 
-More formally, this is the API call (I've only included the message component of the request):
+より正式には、このAPI呼び出しです（リクエストのメッセージ要素のみを含めました）。
 
 ```python
-CONTENT = """Answer the question based on the context below. Keep the answer short and concise. Respond \"Unsure about answer\" if not sure about the answer.
+CONTENT = """以下の文脈に基づき、質問に答えてください。回答は短く、簡潔に答えてください。答えに自信がない場合は、 \"回答できません。\" と答えてください。
 
-Context: Teplizumab traces its roots to a New Jersey drug company called Ortho Pharmaceutical. There, scientists generated an early version of the antibody, dubbed OKT3. Originally sourced from mice, the molecule was able to bind to the surface of T cells and limit their cell-killing potential. In 1986, it was approved to help prevent organ rejection after kidney transplants, making it the first therapeutic antibody allowed for human use.
+Context: テプリズマブのルーツは、ニュージャージー州のオーソ・ファーマシューティカルという製薬会社です。そこで科学者たちは、OKT3と名付けられたこの抗体の初期バージョンを作製した。この分子はもともとマウスから採取したもので、T細胞の表面に結合し、その殺傷能力を制限することができた。1986年には、腎臓移植後の臓器拒絶反応を防ぐ目的で承認され、ヒトへの使用が許可された最初の治療用抗体となりました。
 
-Question: What was OKT3 originally sourced from?
+Question: OKT3はもともと何から調達されたのですか？
 
 Answer:
 """
@@ -136,11 +136,11 @@ response = openai.ChatCompletion.create(
 )
 ```
 
-### Instructing Chat Models
+### チャットモデルの指示
 
-According to the official OpenAI docs, snapshots of the `gpt-3.5-turbo` model will also be made available. For example, we can access the snapshot from March 1 `gpt-3.5-turbo-0301`. This allows developers to opt for specific model versions. This also means that the best practices for instructing models may change from version to version. 
+公式のOpenAIドキュメントによると、`gpt-3.5-turbo`モデルのスナップショットも利用可能になります。たとえば、3月1日のスナップショット `gpt-3.5-turbo-0301` にアクセスできます。これにより、開発者は特定のモデルバージョンを選択できます。これはまた、モデルの指示のためのベストプラクティスがバージョンごとに変更される可能性があることを意味します。
 
-The current recommendation for `gpt-3.5-turbo-0301` is to add instructions in the `user` message as opposed to the available `system` message. 
+`gpt-3.5-turbo-0301`の現在の推奨事項は、利用可能な `system` メッセージではなく、`user` メッセージに指示を追加することです。
 
 ---
 ## References

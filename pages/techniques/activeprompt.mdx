@@ -1,12 +1,14 @@
-# Active-Prompt
+# アクティブプロンプト
 
 import { Callout, FileTree } from 'nextra-theme-docs'
 import {Screenshot} from 'components/screenshot'
 import ACTIVE from '../../img/active-prompt.png'
 
-Chain-of-thought (CoT) methods rely on a fixed set of human-annotated exemplars. The problem with this is that the exemplars might not be the most effective examples for the different tasks. To address this, [Diao et al., (2023)](https://arxiv.org/pdf/2302.12246.pdf) recently proposed a new prompting approach called Active-Prompt to adapt LLMs to different task-specific example prompts (annotated with human-designed CoT reasoning).
+# Active-Prompt
 
-Below is an illustration of the approach. The first step is to query the LLM with or without a few CoT examples. *k* possible answers are generated for a set of training questions. An uncertainty metric is calculated based on the *k* answers (disagreement used). The most uncertain questions are selected for annotation by humans. The new annotated exemplars are then used to infer each question. 
+Chain-of-thought (CoT)メソッドは、固定された人間による注釈付きの例のセットに依存しています。これには、例が異なるタスクに対して最も効果的なものでない可能性があるという問題があります。[Diaoら(2023)](https://arxiv.org/pdf/2302.12246.pdf)は、最近、異なるタスク固有の例のプロンプト(人間によるCoT推論で注釈付けされたもの)に適応するための新しいプロンプトアプローチであるActive-Promptを提案しました。
+
+以下は、このアプローチの概要図です。最初のステップは、LLMに対してCoT例をいくつか含めて問い合わせます。一連のトレーニング質問に対して、*k*個の可能な回答が生成されます。*k*個の回答に基づいて不確実性メトリックが計算されます(不一致を使用)。最も不確実な質問が人間によって注釈付けされます。新しい注釈付きの例は、それぞれの質問の推論に使用されます。
 
 <Screenshot src={ACTIVE} alt="ACTIVE" />
 Image Source: [Diao et al., (2023)](https://arxiv.org/pdf/2302.12246.pdf)

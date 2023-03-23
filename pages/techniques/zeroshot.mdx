@@ -1,21 +1,21 @@
-# Zero-Shot Prompting
-LLMs today trained on large amounts of data and tuned to follow instructions, are capable of performing tasks zero-shot. We tried a few zero-shot examples in the previous section. Here is one of the examples we used:
+# Zero-Shotプロンプティング
+大量のデータでトレーニングされ、指示に従うように調整されたLLMは、ゼロショットでタスクを実行することができます。前のセクションでいくつかのゼロショットの例を試しました。以下は、使用した例の1つです。
 
-*Prompt:*
+*プロンプト：*
 ```
-Classify the text into neutral, negative or positive. 
+テキストを中立、否定的、または肯定的に分類してください。
 
-Text: I think the vacation is okay.
-Sentiment:
-```
-
-*Output:*
-```
-Neutral
+テキスト: 休暇はまずまずでした。
+所感:
 ```
 
-Note that in the prompt above we didn't provide the model with any examples -- that's the zero-shot capabilities at work. 
+*出力：*
+```
+中立
+```
 
-Instruction tuning has shown to improve zero-shot learning [Wei et al. (2022)](https://arxiv.org/pdf/2109.01652.pdf). Instruction tuning is essentially the concept of finetuning models on datasets described via instructions. Furthermore, [RLHF](https://arxiv.org/abs/1706.03741) (reinforcement learning from human feedback) has been adopted to scale instruction tuning wherein the model is aligned to better fit human preferences. This recent development powers models like ChatGPT. We will discuss all these approaches and methods in upcoming sections.
+上記のプロンプトでは、モデルに任意の例を提供していないことに注意してください。これがゼロショットの機能です。
 
-When zero-shot doesn't work, it's recommended to provide demonstrations or examples in the prompt which leads to few-shot prompting. In the next section, we demonstrate few-shot prompting.
+指示のチューニングは、ゼロショット学習の改善を示しています[Wei et al. (2022)](https://arxiv.org/pdf/2109.01652.pdf)。指示の説明に従って説明されたデータセットでモデルを微調整することが、指示のチューニングの本質です。さらに、[RLHF](https://arxiv.org/abs/1706.03741)（人間のフィードバックからの強化学習）が指示のチューニングの拡大に採用されており、モデルが人間の好みにより適合するように調整されています。この最近の開発により、ChatGPTのようなモデルが強化されています。これらのアプローチと方法については、次のセクションで説明します。
+
+ゼロショットが機能しない場合は、プロンプトにデモンストレーションや例を提供することをお勧めし、フューショットプロンプティングに移行します。次のセクションでは、フューショットプロンプティングをデモンストレーションします。

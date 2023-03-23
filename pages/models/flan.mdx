@@ -1,4 +1,4 @@
-# Scaling Instruction-Finetuned Language Models
+# スケーリングされた指示によるファインチューニングされた言語モデル
 
 import {Screenshot} from 'components/screenshot'
 import FLAN1 from '../../img/flan-1.png'
@@ -18,61 +18,61 @@ import FLAN11 from '../../img/flan-11.png'
 <Screenshot src={FLAN1} alt="FLAN1" />
 Image Source: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 
-This paper explores the benefits scaling [instruction finetuning](https://arxiv.org/pdf/2109.01652.pdf) and how it improves performance on a variety of models (PaLM, T5), prompting setups (zero-shot, few-shot, CoT), and benchmarks (MMLU, TyDiQA). This is explored with the following aspects: scaling the number of tasks (1.8K tasks), scaling model size, and finetuning on chain-of-thought data (9 datasets used).
+本論文は、[指示によるファインチューニング](https://arxiv.org/pdf/2109.01652.pdf)のスケーリングの利点を探求し、PaLM、T5などのさまざまなモデル、プロンプトセットアップ（ゼロショット、フューショット、CoT）、およびベンチマーク（MMLU、TyDiQA）でのパフォーマンスの向上について説明しています。これには、以下の側面が探究されます：タスク数のスケーリング（1.8Kタスク）、モデルサイズのスケーリング、および思考連鎖データのファインチューニング（9つのデータセットを使用）。
 
-**Finetuning procedure:**
-- 1.8K tasks were phrased as instructions and used to finetune the model
-- Uses both with and without exemplars, and with and without CoT
+**ファインチューニング手順：**
+- 1.8Kタスクが指示文としてフレーズ化され、モデルのファインチューニングに使用されます。
+- 実例あり・なし、CoTあり・なしの両方を使用します。
 
-Finetuning tasks and held out tasks shown below:
+ファインチューニングタスクと保持タスクは以下に示されています。
 
 <Screenshot src={FLAN11} alt="FLAN11" />
 
-## Capabilities & Key Results
+## 機能と主要結果
 
-- Instruction finetuning scales well with the number of tasks and the size of the model; this suggests the need for scaling number of tasks and size of model further
-- Adding CoT datasets into the finetuning enables good performance on reasoning tasks
-- Flan-PaLM has improved multilingual abilities; 14.9% improvement on one-shot TyDiQA; 8.1% improvement on arithmetic reasoning in under-represented languages
-- Plan-PaLM also performs well on open-ended generation questions, which is a good indicator for improved usability
-- Improves performance across responsible AI (RAI) benchmarks
-- Flan-T5 instruction tuned models demonstrate strong few-shot capabilities and outperforms public checkpoint such as T5
+- 指示によるファインチューニングは、タスク数とモデルサイズの両方にスケーリングすることができます。これは、タスク数とモデルサイズのスケーリングがさらなるパフォーマンス向上の必要性を示唆しています。
+- CoTデータセットをファインチューニングに追加することで、推論タスクにおいて良好なパフォーマンスを発揮することができます。
+- Flan-PaLMは、多言語能力が向上しており、ワンショットTyDiQAで14.9％、未代表言語の算術推論で8.1％の改善が見られます。
+- Plan-PaLMは、オープンエンドの生成問題に対しても良好なパフォーマンスを発揮するため、改善された利用性の指標となります。
+- 責任あるAI（RAI）ベンチマーク全体でパフォーマンスが向上しています。
+- Flan-T5の指示によるチューニングモデルは、強力なフューショット能力を示し、T5のパブリックチェックポイントなどを上回ります。
 
 
-**The results when scaling number of finetuning tasks and model size:** scaling both the size of the model and the number of finetuning tasks is expected to continue improving performance, although scaling the number of tasks has diminished returns.
+**ファインチューニングタスク数とモデルサイズをスケーリングした場合の結果：** モデルサイズとファインチューニングタスク数の両方をスケーリングすることにより、パフォーマンスが継続的に改善されると予想されますが、タスク数をスケーリングすることは収益が減少することがわかっています。
 
 <Screenshot src={FLAN2} alt="FLAN2" />
 Image Source: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 
-**The results when finetuning with non-CoT and CoT data:** Jointly finetuning on non-CoT and CoT data improves performance on both evaluations, compared to finetuning on just one or the other.
+**非CoTとCoTのデータでファインチューニングした場合の結果：** 非CoTとCoTのデータの両方でファインチューニングを行うことで、単一の評価の場合よりも両方でパフォーマンスが向上します。
 
 <Screenshot src={FLAN3} alt="FLAN3" />
 Image Source: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 
-In addition, self-consistency combined with CoT achieves SoTA results on several benchmarks. CoT + self-consistency also significantly improves results on benchmarks involving math problems (e.g., MGSM, GSM8K).
+さらに、CoTと自己整合性を組み合わせることで、いくつかのベンチマークで最先端の結果を達成しています。 CoT +自己整合性は、数学問題を含むベンチマークにおいても結果を大幅に改善します（例：MGSM、GSM8K）。
 
 <Screenshot src={FLAN4} alt="FLAN4" />
 Image Source: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 
-CoT finetuning unlocks zero-shot reasoning, activated by the phrase "let's think step-by-step", on BIG-Bench tasks. In general, zero-shot CoT Flan-PaLM outperforms zero-shot CoT PaLM without finetuning.
+CoTファインチューニングは、BIG-Benchタスクの「一歩一歩考えてみましょう」というフレーズにより、ゼロショット推論が可能になります。一般的に、ファインチューニングなしのゼロショットCoT PaLMよりも、ゼロショットCoT Flan-PaLMの方が優れたパフォーマンスを発揮します。
 
 <Screenshot src={FLAN6} alt="FLAN6" />
 Image Source: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 
-Below are some demonstrations of zero-shot CoT for PaLM and Flan-PaLM in unseen tasks.
+以下は、PaLMとFlan-PaLMのゼロショットCoTの見本です。
 
 <Screenshot src={FLAN5} alt="FLAN5" />
 Image Source: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 
-Below are more examples for zero-shot prompting. It shows how the PaLM model struggles with repetitions and not replying to instructions in the zero-shot setting where the Flan-PaLM is able to perform well. Few-shot exemplars can mitigate these errors. 
+以下は、ゼロショットでのプロンプトの例です。PaLMモデルが、Flan-PaLMが良好なパフォーマンスを発揮できるZero-shot設定において、繰り返しに苦戦し、指示に対して返答しない様子を示しています。Few-shotの模範解答は、これらのエラーを軽減することができます。
 
 <Screenshot src={FLAN7} alt="FLAN7" />
 Image Source: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 
-Below are some examples demonstrating more zero-shot capabilities of the Flan-PALM model on several different types of challenging open-ended questions:
+以下は、Flan-PALMモデルのゼロショット能力を、いくつかの異なるタイプの難しい自由形式の質問で実証した例です：
+
 
 <Screenshot src={FLAN8} alt="FLAN8" />
 Image Source: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
-
 
 <Screenshot src={FLAN9} alt="FLAN9" />
 Image Source: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
@@ -80,4 +80,4 @@ Image Source: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/
 <Screenshot src={FLAN10} alt="FLAN10" />
 Image Source: [Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 
-You can try [Flan-T5 models on the Hugging Face Hub](https://huggingface.co/google/flan-t5-xxl). 
+[Hugging Face HubのFlan-T5モデル](https://huggingface.co/google/flan-t5-xxl)を試すことができます。

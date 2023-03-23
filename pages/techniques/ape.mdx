@@ -1,26 +1,26 @@
-# Automatic Prompt Engineer (APE)
+# 自動プロンプトエンジニア（APE）
 
-import { Callout, FileTree } from 'nextra-theme-docs'
+import { Callout,FileTree } from 'nextra-theme-docs'
 import {Screenshot} from 'components/screenshot'
 import APE from '../../img/APE.png'
 import APECOT from '../../img/ape-zero-shot-cot.png'
 
 <Screenshot src={APE} alt="APE" />
-Image Source: [Zhou et al., (2022)](https://arxiv.org/abs/2211.01910)
+画像出典：[Zhou et al.,（2022年）](https://arxiv.org/abs/2211.01910)
 
-[Zhou et al., (2022)](https://arxiv.org/abs/2211.01910) propose automatic prompt engineer (APE) a framework for automatic instruction generation and selection. The instruction generation problem is framed as natural language synthesis addressed as a black-box optimization problem using LLMs to generate and search over candidate solutions. 
+[Zhou et al.,（2022年）](https://arxiv.org/abs/2211.01910)は、自動指示生成と選択のためのフレームワークである自動プロンプトエンジニア（APE）を提案しています。指示生成問題は、LVMを使用して候補解を生成して検索することで、ブラックボックス最適化問題としてアドレスされる自然言語合成としてフレームされます。
 
-The first step involves a large language model (as an inference model) that is given output demonstrations to generate instruction candidates for a task. These candidate solutions will guide the search procedure. The instructions are executed using a target model, and then the most appropriate instruction is selected based on computed evaluation scores. 
+最初のステップは、タスクのための指示候補を生成する推論モデルとしての大規模言語モデルを使用することです。これらの候補解は、検索手順を指導します。指示はターゲットモデルを使用して実行され、計算された評価スコアに基づいて最適な指示が選択されます。
 
-APE discovers a better zero-shot CoT prompt than the human engineered "Let's think step by step" prompt (Kojima et al., 2022).
+APEは、人間が設計した「一緒にステップバイステップで考えてみましょう」というプロンプトよりも優れたゼロショットCoTプロンプトを発見しました（Kojima et al.、2022）。
 
-The prompt "Let's work this out it a step by step to be sure we have the right answer." elicits chain-of-though reasoning and improves performance on the MultiArith and GSM8K benchmarks:
+「一緒にステップバイステップで作業し、正しい答えを確認するために」のプロンプトは、思考の連鎖を引き起こし、MultiArithおよびGSM8Kベンチマークのパフォーマンスを向上させます。
 
 <Screenshot src={APECOT} alt="APECOT" />
-Image Source: [Zhou et al., (2022)](https://arxiv.org/abs/2211.01910)
+画像出典：[Zhou et al.,（2022年）](https://arxiv.org/abs/2211.01910)
 
-This paper touches on an important topic related to prompt engineering which is the idea of automatically optimizing prompts. While we don't go deep into this topic in this guide, here are a few key papers if you are interested in the topic:
+この論文は、プロンプトエンジニアリングに関連する重要なトピックに触れており、プロンプトを自動的に最適化するアイデアが含まれています。このガイドではこのトピックについて深く掘り下げませんが、興味がある場合は、以下のいくつかの主要な論文をご紹介します。
 
-- [AutoPrompt](https://arxiv.org/abs/2010.15980) - proposes an approach to automatically create prompts for a diverse set of tasks based on gradient-guided search.
-- [Prefix Tuning](https://arxiv.org/abs/2101.00190) - a lightweight alternative to fine-tuning that prepends a trainable continuous prefix for NLG tasks. 
-- [Prompt Tuning](https://arxiv.org/abs/2104.08691) - proposes a mechanism for learning soft prompts through backpropagation.
+- [AutoPrompt](https://arxiv.org/abs/2010.15980) - 勾配誘導型の検索に基づいて、多様なタスクのためのプロンプトを自動的に作成するアプローチを提案します。
+- [Prefix Tuning](https://arxiv.org/abs/2101.00190) - NLGタスクのためのトレーニング可能な連続プレフィックスを前置する、ファインチューニングの軽量な代替案です。
+- [Prompt Tuning](https://arxiv.org/abs/2104.08691) - 逆伝播を通じてソフトプロンプトを学習するメカニズムを提案します。

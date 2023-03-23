@@ -1,288 +1,286 @@
-# Examples of Prompts
+# プロンプトの例
 
-In the previous section, we introduced and gave a basic examples of how to prompt LLMs. 
+前のセクションでは、LLMにプロンプトを与える方法の基本的な例を紹介しました。
 
-In this section, we will provide more examples of how prompts are used to achieve different tasks and introduce key concepts along the way. Often, the best way to learn concepts is by going through examples. Below we cover a few examples of how well-crafted prompts can be used to perform different types of tasks.
+このセクションでは、プロンプトがどのように異なるタスクを実行するために使用されるかのさらなる例を示し、その過程でキーとなるコンセプトを紹介します。概念を学ぶ最良の方法は、例を通して理解することです。以下では、上手く作成されたプロンプトが異なるタイプのタスクを実行するためにどのように使用されるかについていくつかの例をカバーしています。
 
-Topics:
-- [Text Summarization](#text-summarization)
-- [Information Extraction](#information-extraction)
-- [Question Answering](#question-answering)
-- [Text Classification](#text-classification)
-- [Conversation](#conversation)
-- [Code Generation](#code-generation)
-- [Reasoning](#reasoning)
+トピック：
+- [テキスト要約](#テキスト要約)
+- [情報抽出](#情報抽出)
+- [質問応答](#質問応答)
+- [テキスト分類](#テキスト分類)
+- [会話](#会話)
+- [コード生成](#code-generation)
+- [推論](#reasoning)
 
 ---
 
-## Text Summarization
-One of the standard tasks in natural language generation is text summarization. Text summarization can include many different flavors and domains. In fact, one of the most promising applications of language models is the ability to summarize articles and concepts into quick and easy-to-read summaries. Let's try a basic summarization task using prompts.
+## テキスト要約
+自然言語生成の標準的なタスクの1つに、テキスト要約があります。テキスト要約にはさまざまなフレーバーやドメインが含まれることがあります。実際、言語モデルの最も有望な応用の1つは、記事やコンセプトをクイックで読みやすい要約にまとめる能力です。プロンプトを使用して基本的な要約タスクを試してみましょう。
 
-Let's say I am interested to learn about antibiotics, I could try a prompt like this:
+例えば、抗生物質について学びたいと思った場合、次のようなプロンプトを試すことができます。
 
-*Prompt:*
+*プロンプト:*
 ```
-Explain antibiotics
+抗生物質について説明してください。
 
 A:
 ```
 
-*Output:*
+*出力:*
 ```
-Antibiotics are a type of medication used to treat bacterial infections. They work by either killing the bacteria or preventing them from reproducing, allowing the body’s immune system to fight off the infection. Antibiotics are usually taken orally in the form of pills, capsules, or liquid solutions, or sometimes administered intravenously. They are not effective against viral infections, and using them inappropriately can lead to antibiotic resistance.
-```
-
-The "A:" is an explicit prompt format that's used in question answering. I used it here to tell the model that there is an expected further. In this example, it's not clear how this is useful vs not using it but we will leave it that for later examples. Let's just assume that this is too much information and want to summarize it further. In fact, we can instruct the model to summarize into one sentence like so:
-
-*Prompt:*
-```
-Antibiotics are a type of medication used to treat bacterial infections. They work by either killing the bacteria or preventing them from reproducing, allowing the body’s immune system to fight off the infection. Antibiotics are usually taken orally in the form of pills, capsules, or liquid solutions, or sometimes administered intravenously. They are not effective against viral infections, and using them inappropriately can lead to antibiotic resistance.
-
-Explain the above in one sentence:
+抗生物質は、細菌感染を治療するために使用される薬剤の一種です。細菌を殺すか、再生を防止して、体の免疫系が感染に対抗できるようにします。抗生物質は、錠剤、カプセル、液体溶液の形で通常口から摂取されますが、場合によっては静脈内投与されることもあります。抗生物質は、ウイルス感染には効果がなく、不適切に使用すると抗生物質耐性を引き起こす可能性があります。
 ```
 
-*Output:*
+"A:"は質問応答で使用される明示的なプロンプトフォーマットです。ここでは、モデルにさらに情報が必要であることを伝えるために使用しました。この例では、これがどのように有用であるかという点は後の例で検討します。とりあえず、これは情報が多すぎると感じ、さらに要約したいと思ったとします。実際、モデルに1文で要約するように指示することができます。
+
+*プロンプト:*
 ```
-Antibiotics are medications used to treat bacterial infections by either killing the bacteria or stopping them from reproducing, but they are not effective against viruses and overuse can lead to antibiotic resistance.
+抗生物質は、細菌感染を治療するために使用される薬剤の一種です。細菌を殺すか、再生を防止して、体の免疫系が感染に対抗できるようにします。抗生物質は、錠剤、カプセル、液体溶液の形で通常口から摂取されますが、場合によっては静脈内投与されることもあります。抗生物質は、ウイルス感染には効果がなく、不適切に使用すると抗生物質耐性を引き起こす可能性があります。
+
+上記を1文で説明してください。
 ```
 
-Without paying too much attention to the accuracy of the output above, which is something we will touch on in a later guide, the model tried to summarize the paragraph in one sentence. You can get clever with the instructions but we will leave that for a later chapter. Feel free to pause here and experiment to see if you get better results.
+*出力:*
+```
+抗生物質は、細菌感染を治療するために使用される薬剤であり、細菌を殺すか再生を防止し、ウイルスには効果がなく、過剰摂取によって抗生物質耐性を引き起こす可能性があります。
+```
+
+出力の正確性にあまり注意を払わないことにしますが、モデルは段落を1文で要約しようとしました。指示をうまく使うことができますが、それについては後の章で触れます。ここで一度停止して、より良い結果を得るために実験してみてください。
 
 ---
-## Information Extraction
-While language models are trained to perform natural language generation and related tasks, it's also very capable of performing classification and a range of other natural language processing (NLP) tasks. 
+## 情報抽出
+言語モデルは、自然言語生成や関連するタスクを実行するように訓練されていますが、分類やその他の自然言語処理（NLP）タスクを実行することも非常に可能です。
 
-Here is an example of a prompt that extracts information from a given paragraph.
+以下は、与えられた段落から情報を抽出するプロンプトの例です。
 
-*Prompt:*
+*プロンプト：*
 ```
-Author-contribution statements and acknowledgements in research papers should state clearly and specifically whether, and to what extent, the authors used AI technologies such as ChatGPT in the preparation of their manuscript and analysis. They should also indicate which LLMs were used. This will alert editors and reviewers to scrutinize manuscripts more carefully for potential biases, inaccuracies and improper source crediting. Likewise, scientific journals should be transparent about their use of LLMs, for example when selecting submitted manuscripts.
+研究論文の著者貢献声明や謝辞には、筆者が ChatGPT のようなAIテクノロジーを原稿および分析の準備に使用したかどうか、およびどの LLMs を使用したかが明確かつ具体的に記載されている必要があります。これにより、編集者や査読者がバイアス、不正な引用元のクレジット付け、不正確さなどの可能性について、より注意深く原稿を精査することができます。同様に、科学ジャーナルは、投稿された原稿の選定時に LLMs を使用した場合には、透明性を持って開示する必要があります。
 
-Mention the large language model based product mentioned in the paragraph above:
+上記の段落において言及されている大規模言語モデルベースの製品を述べてください。
+```
+*出力：*
+```
+上記の段落において言及されている大規模言語モデルベースの製品は ChatGPT です。
 ```
 
-*Output:*
-```
-The large language model based product mentioned in the paragraph above is ChatGPT.
-```
+上記の結果を改善する方法は多数ありますが、これはすでに非常に有用です。
 
-There are many ways we can improve the results above, but this is already very useful.
+今では、単にモデルに何をするか指示することで、モデルにさまざまなタスクを実行させることができることが明らかになっています。これは、AI 製品開発者が既に強力な製品や体験を構築するために使用している強力な能力です。
 
-By now it should be obvious that you can ask the model to perform different tasks by simply instructing it what to do. That's a powerful capability that AI product developers are already using to build powerful products and experiences.
-
-
-Paragraph source: [ChatGPT: five priorities for research](https://www.nature.com/articles/d41586-023-00288-7) 
+段落の出典：[ChatGPT: five priorities for research](https://www.nature.com/articles/d41586-023-00288-7)
 
 ---
-## Question Answering
+## 質問応答
 
-One of the best ways to get the model to respond to specific answers is to improve the format of the prompt. As covered before, a prompt could combine instructions, context, input, and output indicators to get improved results. While these components are not required, it becomes a good practice as the more specific you are with instruction, the better results you will get. Below is an example of how this would look following a more structured prompt.
+モデルに特定の回答を返すようにする最良の方法の1つは、プロンプトのフォーマットを改善することです。前述のように、プロンプトは指示、文脈、入力、および出力インジケーターを組み合わせて、改善された結果を得ることができます。これらのコンポーネントは必須ではありませんが、指示が具体的であるほど、より良い結果が得られるため、良い習慣となります。以下は、より構造化されたプロンプトに従って見える例です。
 
-*Prompt:*
+*プロンプト：*
 ```
-Answer the question based on the context below. Keep the answer short and concise. Respond "Unsure about answer" if not sure about the answer.
+以下の文脈に基づいて質問に答えてください。回答を短く簡潔に保ちます。回答が不明な場合は、「回答不明」と回答してください。
 
-Context: Teplizumab traces its roots to a New Jersey drug company called Ortho Pharmaceutical. There, scientists generated an early version of the antibody, dubbed OKT3. Originally sourced from mice, the molecule was able to bind to the surface of T cells and limit their cell-killing potential. In 1986, it was approved to help prevent organ rejection after kidney transplants, making it the first therapeutic antibody allowed for human use.
+文脈：Teplizumabは、Ortho Pharmaceuticalと呼ばれるニュージャージー州の薬剤会社に由来します。そこでは、科学者たちはOKT3という抗体の初期バージョンを生成しました。分子はもともとマウスから採取され、T細胞の表面に結合し、その細胞殺傷能力を制限することができました。1986年に、腎臓移植後の臓器拒絶を防止するために承認され、これにより、人間の使用に許可された最初の治療用抗体となりました。
 
-Question: What was OKT3 originally sourced from?
+質問：OKT3はもともとどこから採取されたものですか？
 
-Answer:
-```
-
-*Output:*
-```
-Mice.
+回答：
 ```
 
-Context obtained from [Nature](https://www.nature.com/articles/d41586-023-00400-x).
+*出力：*
+```
+マウス。
+```
+
+文脈は[Nature](https://www.nature.com/articles/d41586-023-00400-x)から取得されました。
 
 ---
 
-## Text Classification
-So far, we have used simple instructions to perform a task. As a prompt engineer, you will need to get better at providing better instructions. But that's not all! You will also find that for harder use cases, just providing instructions won't be enough. This is where you need to think more about the context and the different elements you can use in a prompt. Other elements you can provide are `input data` or `examples`. 
+## テキスト分類
+ここまで、タスクを実行するために単純な指示を使用してきました。プロンプトエンジニアとして、より良い指示を提供するために上達する必要があります。しかし、それだけではありません！より難しいユースケースでは、指示を提供するだけでは十分ではないことがわかります。これは、コンテキストやプロンプトで使用できるさまざまな要素についてより考える必要があるということです。提供できる他の要素には、`データ入力`または`例示`があります。
 
-Let's try to demonstrate this by providing an example of text classification.
+テキスト分類の例を提供することによって、これをデモンストレーションしてみましょう。
 
-*Prompt:*
+*プロンプト：*
 ```
-Classify the text into neutral, negative or positive. 
+テキストをneutral、negative、またはpositiveに分類してください。
 
-Text: I think the food was okay. 
-Sentiment:
+テキスト：この食べ物はまずまずでした。
+所感:
 ```
 
-*Output:*
+*出力:*
 ```
 Neutral
 ```
 
-We gave the instruction to classify the text and the model responded with `'Neutral'` which is correct. Nothing is wrong with this but let's say that what we really need is for the model to give the label in the exact format we want. So instead of `Neutral` we want it to return `neutral`. How do we achieve this? There are different ways to do this. We care about specificity here, so the more information we can provide the prompt the better results. We can try providing examples to specify the correct behavior. Let's try again:
+私たちはテキストを分類する指示を与え、モデルが「`Neutral`」という正しい答えを返しました。これには何も問題はありませんが、本当に必要なのは、モデルが正確な形式でラベルを返すことです。 `Neutral`の代わりに`neutral`を返すようにしたい場合、どうすればよいでしょうか？これを実現する方法にはさまざまな方法があります。ここでは特殊性について関心がありますので、プロンプトに提供できる情報が多いほど、より良い結果が得られます。正しい動作を指定するための例を提供してみましょう。もう一度試してみましょう。
 
-*Prompt:*
+*プロンプト：*
 ```
-Classify the text into neutral, negative or positive. 
+テキストを中立、否定的、または肯定的に分類してください。
 
-Text: I think the vacation is okay.
-Sentiment: neutral 
+テキスト：先日の休暇はまずまずでした。
+所感: neutral 
 
-Text: I think the food was okay. 
-Sentiment:
+テキスト：この食べ物はまずまずでした。
+所感:
 ```
 
-*Output:*
+*出力:*
 ```
 neutral
 ```
 
-Perfect! This time the model returned `neutral` which is the specific label I was looking for. It seems that the example provided in the prompt helped the model to be specific in its output. To highlight why sometimes being specific is important, check out this example and spot the problem:
+素晴らしい！今回は、モデルが私が探していた特定のラベルである「neutral」を返しました。プロンプトで提供された例が、モデルが出力を特定するのに役立ったようです。なぜ時に特定性が重要なのかを強調するために、次の例を確認して、問題を見つけてください。
 
-*Prompt:*
+*プロンプト：*
 ```
-Classify the text into nutral, negative or positive. 
+テキストをneutral、negative、またはpositiveに分類してください。
 
-Text: I think the vacation is okay.
-Sentiment:
+テキスト：先日の休暇はまずまずでした。
+所感:
 ```
 
-*Output:*
+*出力:*
 ```
 Neutral
 ```
 
-What is the problem here?
+何が問題だと思いますか？
 
 ---
 
-## Conversation
-Perhaps one of the more interesting things you can achieve with prompt engineering is instructing the LLM system on how to behave, its intent, and its identity. This is particularly useful when you are building conversational systems like customer service chatbots.
+## 会話
+プロンプトエンジニアリングで達成できることの中でも、LLMシステムの振る舞い、意図、アイデンティティの指示は特に興味深いものです。これは、カスタマーサービスのチャットボットなどの会話システムを構築する場合に特に役立ちます。
 
-For instance, let's create a conversational system that's able to generate more technical and scientific responses to questions. Note how we are explicitly telling it how to behave through the instruction. This is sometimes referred to as *role prompting*.
+例えば、より技術的で科学的な回答を生成できる会話システムを作成しましょう。指示によって、どのように振る舞うかを明示的に伝えていることに注目してください。これは、*role prompting*と呼ばれることがあります。
 
-*Prompt:*
+*プロンプト:*
 ```
-The following is a conversation with an AI research assistant. The assistant tone is technical and scientific.
+以下はAI研究アシスタントとの会話です。アシスタントのトーンは技術的で科学的です。
 
-Human: Hello, who are you?
-AI: Greeting! I am an AI research assistant. How can I help you today?
-Human: Can you tell me about the creation of blackholes?
+人: こんにちは、あなたは誰ですか？
+AI: ご挨拶！私はAI研究アシスタントです。今日は何をお手伝いできますか？
+人: ブラックホールの生成について教えてもらえますか？
 AI:
 ```
 
-*Output:*
+*出力:*
 ```
-Sure! Black holes are regions of spacetime where the gravitational force is so strong that nothing, not even light, can escape from it. They are created when a very massive star dies and its core collapses in on itself, forming a singularity of infinite density. The intense gravity of the singularity pulls in all the matter and radiation around it, creating the black hole.
+もちろんです！ブラックホールとは、重力の力が非常に強く、光を含めて何も脱出できない時空の領域です。非常に質量のある星が死亡し、そのコアが自己崩壊して無限密度の特異点を形成すると、ブラックホールが形成されます。特異点の強烈な引力により、周囲の物質や放射線が引き寄せられ、ブラックホールが作成されます。
 ```
 
-Our AI research assistant sounds a bit too technical, right? Okay, let's change this behavior and instruct the system to give more accessible answers. 
+AI研究アシスタントの回答は少し技術的すぎるようですね。では、この振る舞いを変更して、システムによりアクセスしやすい回答を指示しましょう。
 
-*Prompt:*
+*プロンプト:*
 ```
-The following is a conversation with an AI research assistant. The assistant answers should be easy to understand even by primary school students.
+以下はAI研究アシスタントとの会話です。アシスタントの回答は小学生でも理解できるようになっています。
 
-Human: Hello, who are you?
-AI: Greeting! I am an AI research assistant. How can I help you today?
-Human: Can you tell me about the creation of black holes?
+人: こんにちは、あなたは誰ですか？
+AI: ご挨拶！私はAI研究アシスタントです。今日は何をお手伝いできますか？
+人: ブラックホールの生成について教えてもらえますか？
 AI: 
 ```
 
-*Output:*
+*出力:*
 ```
-Sure! Black holes are created when a very massive star runs out of fuel and collapses in on itself. The gravity of the star is so strong that nothing, not even light, can escape its pull. This creates a point in space-time with an intense gravitational force called a black hole.
+もちろんです！ブラックホールは、非常に大きな星が燃料を使い果たし、崩壊することで作られます。星の重力が非常に強いため、光でさえも引き寄せられて、その重力場によって空間に点ができます。それがブラックホールです。
 ```
 
-I think we made some progress. You can continue improving it. I am sure if you add more examples you might get even better results. 
+進歩を遂げたようですね。引き続き改善することができます。さらに例を追加すると、さらに良い結果が得られる可能性があると思われます。
 
 ---
 
-## Code Generation
-One application where LLMs are quite effective is code generation. Copilot is a great example of this. There are a vast number of code-generation tasks you can perform with clever prompts. Let's look at a few examples below.
+## コード生成
+LLMは非常に効果的なコード生成のアプリケーションの一つです。Copilotはその素晴らしい例です。巧妙なプロンプトを使えば、多くのコード生成タスクを実行できます。以下にいくつか例を見てみましょう。
 
-First, let's try a simple program that greets the user.
+まず、ユーザーに挨拶する簡単なプログラムを試してみましょう。
 
-*Prompt:*
+*プロンプト:*
 ```
 /*
-Ask the user for their name and say "Hello"
+ユーザーに名前を聞いて、「こんにちは」と言ってください。
 */
 ```
 
-*Output:*
+*出力:*
 ```
-let name = prompt("What is your name?");
-console.log(`Hello, ${name}!`);
+let name = prompt("あなたの名前は何ですか？");
+console.log(`こんにちは、${name}さん！`);
 ```
 
-You can see that we didn't even need to specify the language to use.
+言語の指定さえ必要ありませんでした。
 
-Let's switch levels a bit. I want to show you how powerful LLMs can be with a little more effort in designing the prompts.
+次に、もう少しプロンプトの設計に努力を加えることで、LLMがどれほど強力であるかを示したいと思います。
 
-*Prompt:*
+*プロンプト:*
 ```
 """
-Table departments, columns = [DepartmentId, DepartmentName]
-Table students, columns = [DepartmentId, StudentId, StudentName]
-Create a MySQL query for all students in the Computer Science Department
+テーブル名 departments、カラム=[DepartmentId、DepartmentName]
+テーブル名 students、カラム=[DepartmentId、StudentId、StudentName]
+コンピュータサイエンス学科のすべての学生のためのMySQLクエリを作成してください。
 """
 ```
 
-*Output:*
+*出力:*
 ```
-SELECT StudentId, StudentName 
-FROM students 
+SELECT StudentId、StudentName
+FROM students
 WHERE DepartmentId IN (SELECT DepartmentId FROM departments WHERE DepartmentName = 'Computer Science');
 ```
 
-This is very impressive. In this case, we provided data about the database schema and asked it to generate a valid MySQL query. 
+これは非常に印象的です。この場合、データベースのスキーマに関するデータを提供し、有効なMySQLクエリを生成するように求めました。
 
 ---
 
-## Reasoning
-Perhaps one of the most difficult tasks for an LLM today is one that requires some form of reasoning. Reasoning is one of the areas that I am most excited about due to the types of complex applications that can emerge from LLMs.
+## 推論
+現代のLLMにとって、最も困難なタスクの一つは、何らかの形での推論を必要とするものです。推論は、複雑なアプリケーションが生み出される可能性があるため、私が最も興奮している分野の一つです。
 
-There have been some improvements in tasks involving mathematical capabilities. That said, it's important to note that current LLMs struggle to perform reasoning tasks so this requires even more advanced prompt engineering techniques. We will cover these advanced techniques in the next guide. For now, we will cover a few basic examples to show arithmetic capabilities.
+数学的な能力を必要とするタスクにおいては、いくつかの改善が見られました。ただし、現在のLLMは推論タスクを実行するのが困難であるため、更に高度なプロンプトエンジニアリング技術が必要です。次のガイドでこれらの高度な技術をカバーしていきます。今のところ、算術能力を示すいくつかの基本的な例を紹介します。
 
-*Prompt:*
+*プロンプト:*
 ```
-What is 9,000 * 9,000?
+9,000 * 9,000は何ですか？
 ```
 
-*Output:*
+*出力:*
 ```
 81,000,000
 ```
 
-Let's try something more difficult. 
+もう少し難しい問題を試してみましょう。
 
-*Prompt:*
+*プロンプト:*
 ```
-The odd numbers in this group add up to an even number: 15, 32, 5, 13, 82, 7, 1. 
+このグループの奇数の数値を合計すると偶数になります: 15, 32, 5, 13, 82, 7, 1。
 
 A: 
 ```
 
-*Output*
+*出力*
 ```
-No, the odd numbers in this group add up to an odd number: 119.
-```
-
-That's incorrect! Let's try to improve this by improving the prompt.
-
-*Prompt:*
-```
-The odd numbers in this group add up to an even number: 15, 32, 5, 13, 82, 7, 1. 
-
-Solve by breaking the problem into steps. First, identify the odd numbers, add them, and indicate whether the result is odd or even. 
+いいえ、このグループの奇数の数値を合計すると奇数になります: 119。
 ```
 
-*Output:*
+これは誤りです！プロンプトを改善することで、精度を向上させてみましょう。
+
+*プロンプト:*
 ```
-Odd numbers: 15, 5, 13, 7, 1
-Sum: 41 
-41 is an odd number.
+このグループの奇数の数値を合計すると偶数になります: 15, 32, 5, 13, 82, 7, 1。
+
+問題をステップごとに解決してください。まず、奇数の数値を特定し、それらを合計して結果が奇数か偶数かを示してください。
 ```
 
-Much better, right? By the way, I tried this a couple of times and the system sometimes fails. If you provide better instructions combined with examples, it might help get more accurate results.
+*出力:*
+```
+奇数: 15, 5, 13, 7, 1
+合計: 41 
+41は奇数です。
+```
 
-We will continue to include more examples of common applications in this section of the guide.
+ずっと良くなりましたね！ちなみに、私はこれを何度か試しましたが、システムは時々失敗します。よりよい指示と例を提供することで、より正確な結果を得ることができるかもしれません。
 
-In the upcoming section, we will cover even more advanced prompt engineering concepts and techniques for improving performance on all these and more difficult tasks.
+私たちは、このガイドのこのセクションで一般的なアプリケーションのより多くの例を示し続けます。
+
+次のセクションでは、これらすべてのタスクのパフォーマンスを向上させるための、より高度なプロンプトエンジニアリングの概念や技術について説明していきます。

@@ -1,108 +1,107 @@
-# General Tips for Designing Prompts
+# プロンプトの設計に関する一般的なヒント
 
-Here are some tips to keep in mind while you are designing your prompts:
+プロンプトを設計する際には以下のことに注意するとよいでしょう。
 
+### 簡単に始める
+プロンプトの設計を始める際には、最適な結果を得るために多くの実験が必要な反復的なプロセスであることを念頭に置く必要があります。OpenAIやCohereのようなシンプルなプレイグラウンドから始めると良いでしょう。
 
-### Start Simple
-As you get started with designing prompts, you should keep in mind that it is really an iterative process that requires a lot of experimentation to get optimal results. Using a simple playground like OpenAI or Cohere's is a good starting point.
+シンプルなプロンプトから始め、結果を向上させるために要素や文脈を追加していくことができます。そのためにはプロンプトのバージョン管理が重要です。このガイドを読むと、具体性、簡潔さ、明確さがより良い結果をもたらすことがわかるでしょう。
 
-You can start with simple prompts and keep adding more elements and context as you aim for better results. Versioning your prompt along the way is vital for this reason. As we read the guide you will see many examples where specificity, simplicity, and conciseness will often give you better results.
+多くの異なるサブタスクを含む大きなタスクがある場合、タスクをよりシンプルなサブタスクに分解し、結果が改善されるにつれて徐々に構築していくことができます。これにより、プロンプトの設計プロセスにあまり複雑さを加えることがなくなります。
 
-When you have a big task that involves many different subtasks, you can try to break down the task into simpler subtasks and keep building up as you get better results. This avoids adding too much complexity to the prompt design process at the beginning.
+### 指示
+「書く」「分類する」「要約する」「翻訳する」「並べ替える」などのコマンドを使用して、モデルに達成したいことを指示することで、さまざまなシンプルなタスクに対する効果的なプロンプトを設計することができます。
 
-### The Instruction
-You can design effective prompts for various simple tasks by using commands to instruct the model what you want to achieve such as "Write", "Classify", "Summarize", "Translate", "Order", etc.
+最適な結果を得るためには、異なるキーワード、文脈、データを使用した異なる指示を試して、特定のユースケースやタスクに最適なものを見つける必要があります。通常、タスクに関連した文脈が具体的であるほど、結果が良くなります。次のガイドで、サンプリングやより多くの文脈を追加することの重要性について触れます。
 
-Keep in mind that you also need to experiment a lot to see what works best. Try different instructions with different keywords, contexts, and data and see what works best for your particular use case and task. Usually, the more specific and relevant the context is to the task you are trying to perform, the better. We will touch on the importance of sampling and adding more context in the upcoming guides.
+また、指示はプロンプトの最初に配置し、指示と文脈を区切るために「###」のような明確な区切り記号を使用することが推奨されています。
 
-Others recommend that instructions are placed at the beginning of the prompt. It's also recommended that some clear separator like "###" is used to separate the instruction and context.
+例えば：
 
-For instance:
-
-*Prompt:*
+*プロンプト:*
 ```
-### Instruction ###
-Translate the text below to Spanish:
+### 指示 ###
+以下のテキストをスペイン語に翻訳してください。
 
 Text: "hello!"
 ```
 
-*Output:*
+*出力:*
 ```
 ¡Hola!
 ```
+### 特異性
+モデルに実行してほしい指示やタスクについて、非常に具体的に説明してください。プロンプトが詳細で具体的であるほど、結果はよくなります。特定の出力やスタイルを望む場合には、特に重要です。より良い結果をもたらすトークンやキーワードはありません。良いフォーマットと詳細なプロンプトを用意することが重要です。実際、プロンプトに例を提供することは、特定のフォーマットで出力を得るために非常に効果的です。
 
-### Specificity
-Be very specific about the instruction and task you want the model to perform. The more descriptive and detailed the prompt is, the better the results. This is particularly important when you have a desired outcome or style of generation you are seeking. There aren't specific tokens or keywords that lead to better results. It's more important to have a good format and descriptive prompt. In fact, providing examples in the prompt is very effective to get desired output in specific formats.
+プロンプトを設計する際には、プロンプトの長さに関する制限があるため、考慮する必要があります。どの程度具体的かつ詳細にするかを考える必要があります。余計な詳細を含めることは必ずしも良いアプローチではありません。詳細は関連性があり、課題に貢献する必要があります。これは多くの実験と反復を必要とすることです。アプリケーションに最適なプロンプトを最適化するために、多くの実験と反復をお勧めします。
 
-When designing prompts you should also keep in mind the length of the prompt as there are limitations regarding how long this can be. Thinking about how specific and detailed you should be is something to consider. Including too many unnecessary details is not necessarily a good approach. The details should be relevant and contribute to the task at hand. This is something you will need to experiment with a lot. We encourage a lot of experimentation and iteration to optimize prompts for your applications.
+例えば、次のテキストから特定の場所の名前を抽出する簡単なプロンプトを試してみましょう。
 
-As an example, let's try a simple prompt to extract specific information from a piece of text.
-
-*Prompt:*
+*プロンプト：*
 ```
-Extract the name of places in the following text. 
+以下のテキストから場所の名前を抽出してください。
 
-Desired format:
+望ましいフォーマット：
 Place: <comma_separated_list_of_company_names>
 
-Input: "Although these developments are encouraging to researchers, much is still a mystery. “We often have a black box between the brain and the effect we see in the periphery,” says Henrique Veiga-Fernandes, a neuroimmunologist at the Champalimaud Centre for the Unknown in Lisbon. “If we want to use it in the therapeutic context, we actually need to understand the mechanism.""
+入力：「これらの進展は研究者にとって励みになっていますが、まだ多くのことが謎のままです。リスボンのシャンパリマウド・センター・フォー・ジ・アンノウンの神経免疫学者であるヘンリーク・ヴェイガ・フェルナンデスは、「脳と周辺部で見られる効果の間にはしばしばブラックボックスがあります」「治療的な文脈で使用したい場合、実際には作用機序を理解する必要があります。」」
+
 ```
 
-*Output:*
+*出力：*
 ```
 Place: Champalimaud Centre for the Unknown, Lisbon
 ```
 
-Input text is obtained from [this Nature article](https://www.nature.com/articles/d41586-023-00509-z).
+入力テキストは、[このNature記事](https://www.nature.com/articles/d41586-023-00509-z)から取得されています。
 
-### Avoid Impreciseness
+### 不正確さを避ける
 
-Given the tips above about being detailed and improving format, it's easy to fall into the trap of wanting to be too clever about prompts and potentially creating imprecise descriptions. It's often better to be specific and direct. The analogy here is very similar to effective communication -- the more direct, the more effective the message gets across.
+上記の詳細でフォーマットを改善するヒントに加えて、プロンプトについて賢くなりすぎて、不正確な説明を作り出すことが容易になります。具体的で直接的である方が良い結果が得られます。ここでの類似性は、効果的なコミュニケーションと非常に類似しています--直接的であるほど、効果的にメッセージが伝わります。
 
-For example, you might be interested in learning the concept of prompt engineering. You might try something like:
-
-```
-Explain the concept prompt engineering. Keep the explanation short, only a few sentences, and don't be too descriptive.
-```
-
-It's not clear from the prompt above how many sentences to use and what style. You might still somewhat get good responses with the above prompts but the better prompt would be one that is very specific, concise, and to the point. Something like:
+例えば、プロンプトエンジニアリングの概念を学びたいと思うかもしれません。
 
 ```
-Use 2-3 sentences to explain the concept of prompt engineering to a high school student.
+プロンプトエンジニアリングの概念を説明してください。説明は短く、数文で、あまり詳しくしないでください。
 ```
 
-### To do or not to do?
-Another common tip when designing prompts is to avoid saying what not to do but say what to do instead. This encourages more specificity and focuses on the details that lead to good responses from the model.
+上記のプロンプトから、どのように文を数え、スタイルを指定するかは明確ではありません。上記のプロンプトでも、まだ良い回答を得ることができますが、非常に具体的かつ簡潔で、的を射たプロンプトの方が良いでしょう。以下のようなものです。
 
-Here is an example of a movie recommendation chatbot failing at exactly what I don't want it to do because of how I wrote the instruction -- focusing on what not to do.
-
-*Prompt:*
 ```
-The following is an agent that recommends movies to a customer. DO NOT ASK FOR INTERESTS. DO NOT ASK FOR PERSONAL INFORMATION.
-
-Customer: Please recommend a movie based on my interests.
-Agent: 
+高校生に対して、プロンプトエンジニアリングの概念を2〜3文で説明してください。
 ```
 
-*Output:*
+### するかしないか？
+プロンプトを設計する際のもう一つの一般的なヒントは、「しないこと」を言わず、「すること」を言うことです。これにより、より具体的になり、モデルから良い回答を得るための詳細に焦点が当てられます。
+
+以下は、映画の推薦チャットボットが、私が指示を書いた方法のために、正確にやりたくないことに失敗した例です--何をしないでくださいということに焦点を当てています。
+
+*プロンプト：*
 ```
-Sure, I can recommend a movie based on your interests. What kind of movie would you like to watch? Do you prefer action, comedy, romance, or something else?
+以下は、顧客に映画を推薦するエージェントです。興味を尋ねないで、個人情報を尋ねないでください。
+
+顧客：私の興味に基づいて映画をお勧めください。
+エージェント：
 ```
 
-Here is a better prompt:
-
-*Prompt:*
+*出力：*
 ```
-The following is an agent that recommends movies to a customer. The agent is responsible to recommend a movie from the top global trending movies. It should refrain from asking users for their preferences and avoid asking for personal information. If the agent doesn't have a movie to recommend, it should respond "Sorry, couldn't find a movie to recommend today.".
-
-Customer: Please recommend a movie based on my interests.
-Agent:
+はい、あなたの興味に基づいて映画をお勧めできます。アクション、コメディ、ロマンス、それともその他の何か、どのような映画がお好きですか？
 ```
 
-*Output:*
+以下は改善されたプロンプトです：
+
+*プロンプト：*
 ```
-Sorry, I don't have any information about your interests. However, here's a list of the top global trending movies right now: [list of movies]. I hope you find something you like!
+以下は、顧客に映画を推薦するエージェントです。エージェントは、上位のグローバルトレンド映画から映画をお勧めする責任があります。ユーザーの好みを尋ねることを避け、個人情報を尋ねることを避ける必要があります。エージェントがおすすめ映画を持っていない場合は、「申し訳ありませんが、今日お勧めする映画が見つかりませんでした。」と返答する必要があります。
+
+顧客：私の興味に基づいて映画をお勧めください。
+エージェント：
 ```
 
-Some of the examples above were adopted from the ["Best practices for prompt engineering with OpenAI API" article.](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api)
+*出力：*
+```
+申し訳ありませんが、あなたの興味に関する情報はありません。しかし、ここに今一番トレンディーな映画のリストがあります：[リストの映画]。お好きなものが見つかることを願っています！
+```
+
+上記の例のいくつかは、['Best practices for prompt engineering with OpenAI API'](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api)から採用されました。
