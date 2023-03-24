@@ -3,10 +3,9 @@ const withNextra = require('nextra')({
   themeConfig: './theme.config.tsx',
 })
 
-const urlPrefix = process.env.URL_PREFIX ? '/' + process.env.URL_PREFIX : ''
 module.exports = withNextra({
   images: {unoptimized: true},
-  assetPrefix: urlPrefix,
-  basePath: urlPrefix,
+  basePath: process.env.PUBLIC_BASE_PATH,
+  assetPrefix: process.env.PUBLIC_BASE_PATH,
   trailingSlash: true
 })
