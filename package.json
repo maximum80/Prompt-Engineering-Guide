@@ -4,7 +4,7 @@
   "description": "Nextra docs template",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "export URL_PREFIX=‘Prompt-Engineering-Guide’ && next build",
     "start": "next start",
     "export": "next export -o docs/"
   },
